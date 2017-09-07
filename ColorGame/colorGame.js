@@ -21,6 +21,8 @@ resetButton.addEventListener("click", function() {
 });
 easyButton.addEventListener("click", function() {
 	isEasy = true;
+	easyButton.classList.add("selected");
+	hardButton.classList.remove("selected");
 	resetGame(3);
 	for (var i = 3; i < squares.length; i++) {
 		squares[i].style.backgroundColor = "#232323";
@@ -30,19 +32,21 @@ easyButton.addEventListener("click", function() {
 
 hardButton.addEventListener("click", function() {
 	isEasy = false;
+	easyButton.classList.remove("selected");
+	hardButton.classList.add("selected");
 	resetGame(6);
 })
 
 function checkSquare() {
 	if (this.style.backgroundColor === pickedColor) {
-			messageDisplay.textContent = "Correct";
-			resetButton.textContent = "Play Again?";
-			changeColors(pickedColor);
-		}  
-		else {
-			this.style.backgroundColor = "#232323";
-			messageDisplay.textContent = "Try Again";
-		}
+		messageDisplay.textContent = "Correct";
+		resetButton.textContent = "Play Again?";
+		changeColors(pickedColor);
+	}  
+	else {
+		this.style.backgroundColor = "#232323";
+		messageDisplay.textContent = "Try Again";
+	}
 }
 
 function resetGame(num) {
