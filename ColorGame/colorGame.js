@@ -13,17 +13,7 @@ var isEasy = false;
 colorDisplay.textContent = pickedColor;
 for (var i = 0; i < squares.length; i++) {
 	squares[i].style.backgroundColor = colors[i];
-	squares[i].addEventListener("click", function() {
-		if (this.style.backgroundColor === pickedColor) {
-			messageDisplay.textContent = "Correct";
-			resetButton.textContent = "Play Again?";
-			changeColors(pickedColor);
-		}  
-		else {
-			this.style.backgroundColor = "#232323";
-			messageDisplay.textContent = "Try Again";
-		}
-	});
+	squares[i].addEventListener("click", checkSquare);
 }
 
 resetButton.addEventListener("click", function() {
@@ -34,6 +24,7 @@ easyButton.addEventListener("click", function() {
 	resetGame(3);
 	for (var i = 3; i < squares.length; i++) {
 		squares[i].style.backgroundColor = "#232323";
+		squares[i].removeEventListener("click", checkSquare)
 	}
 })
 
@@ -42,12 +33,25 @@ hardButton.addEventListener("click", function() {
 	resetGame(6);
 })
 
+function checkSquare() {
+	if (this.style.backgroundColor === pickedColor) {
+			messageDisplay.textContent = "Correct";
+			resetButton.textContent = "Play Again?";
+			changeColors(pickedColor);
+		}  
+		else {
+			this.style.backgroundColor = "#232323";
+			messageDisplay.textContent = "Try Again";
+		}
+}
+
 function resetGame(num) {
 	colors = generateRandomColors(num);
 	pickedColor = pickColor();
 	colorDisplay.textContent = pickedColor;
 	for (var i = 0; i < colors.length; i++) {
 		squares[i].style.backgroundColor = colors[i];
+		squares[i].addEventListener("click", checkSquare);
 	}
 	messageDisplay.textContent = "";
 	resetButton.textContent = "New Colors";
@@ -55,7 +59,7 @@ function resetGame(num) {
 }
 
 function changeColors(color) {
-	for (var i = 0; i < squares.length; i++) {
+	for (var i = 0; i < colors.length; i++) {
 		squares[i].style.backgroundColor = pickedColor;
 	}
 	h1.style.backgroundColor = pickedColor;
