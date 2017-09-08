@@ -1,5 +1,20 @@
-var colors = generateRandomColors(6);
+/*
+TODO: Refactor
+1. make sure functions are 10 lines or less
+2. make sure code is DRY code
+3. create init() that performs game startup code operations
+4. put everything within a game object
+i.e. 
+var game = {}
+game.init = function () {
+	setupModeButton();
+	setupSquares();
+	reset()
+}
+game.init();
+*/
 
+var colors = generateRandomColors(6);
 var squares = document.querySelectorAll(".square");
 var pickedColor = pickColor();
 var colorDisplay = document.querySelector("#colorDisplay");
