@@ -19,6 +19,7 @@ for (var i = 0; i < squares.length; i++) {
 resetButton.addEventListener("click", function() {
 	isEasy ? resetGame(3) : resetGame(6);
 });
+
 easyButton.addEventListener("click", function() {
 	isEasy = true;
 	easyButton.classList.add("selected");
@@ -59,7 +60,7 @@ function resetGame(num) {
 	}
 	messageDisplay.textContent = "";
 	resetButton.textContent = "New Colors";
-	h1.style.backgroundColor = "#232323";
+	h1.style.backgroundColor = "steelblue";
 }
 
 function changeColors(color) {
