@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Johnatap - A Patatap Clone</title>
+	<link rel="stylesheet" type="text/css" href="stars.css">
+	<script type="text/javascript" src="paper-full.min.js"></script>
+	<!-- Define inlined PaperScript associate it with myCanvas -->
+	<script type="text/paperscript" canvas="myCanvas">
+		var starArray = [];
+
+		function onKeyDown(event) {
+			var star = createRandomStar();
+			starArray.push(star);
+		}
+
+		function onFrame(event) {
+			for (var i = 0; i < starArray.length; i++) {
+				starArray[i].fillColor.hue += 1.5;
+				starArray[i].scale(.9);
+			}
+		}
+
+		function createRandomStar() {
+			var centerPoint = getCenterPoint();
+			// create a star at the random poin on the canvas
+			// Path.Star(centerPoint, numPoints, innerRadius, outerRadius)
+			var star = new Path.Star(centerPoint, 5, 64, 200);
+			star.fillColor = "blue";
+			// rotate star to appear straight
+			star.rotate(35);
+			return star;
+		}
+
+		function getCenterPoint() {
+			var maxPoint = new Point(view.size.width, view.size.height);
+			// the code below is equivalent to Point(Math.random(), Math.random());
+			var randomPoint = Point.random();
+			// get a random point on the canvas
+			var centerPoint = maxPoint * randomPoint;
+			return centerPoint;
+		}
+
+	</script>
+</head>
+<body>
+	<canvas id="myCanvas" resize></canvas>
+</body>
+</html>
