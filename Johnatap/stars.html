@@ -169,19 +169,26 @@
 		var starArray = [];
 
 		function onKeyDown(event) {
-			var star = createRandomStar(event);
-			starArray.push(star);
-			data[event.key].sound.play();
+			if(data[event.key]) {
+				var star = createStar(event);
+				starArray.push(star);
+				data[event.key].sound.play();
+			}
 		}
 
 		function onFrame(event) {
 			for (var i = 0; i < starArray.length; i++) {
 				starArray[i].fillColor.hue += 1.5;
 				starArray[i].scale(.9);
+				if (starArray[i].area < 1) {
+					starArray[i].remove();
+					starArray.splice(i, 1);
+					i--;
+				}
 			}
 		}
 
-		function createRandomStar(event) {
+		function createStar(event) {
 			var centerPoint = getCenterPoint();
 			// create a star at the random poin on the canvas
 			// Path.Star(centerPoint, numPoints, innerRadius, outerRadius)
